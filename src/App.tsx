@@ -1,5 +1,11 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage';
+import FavoritesPage from './components/FavoritesPage';
+import OfferPage from './components/OfferPage';
+import LoginPage from './components/LoginPage';
+import NotFoundPage from './components/NotFoundPage';
+import PrivateRoute from './components/PrivateRoute';
 
 const offers = [
   { id: 1, title: 'Beautiful & luxurious apartment at great location', price: 120, type: 'Apartment', imageUrl: 'img/apartment-01.jpg', isPremium: true, rating: 80 },
@@ -9,6 +15,25 @@ const offers = [
   { id: 5, title: 'Wood and stone place', price: 80, type: 'Room', imageUrl: 'img/room.jpg', isFavorite: true, rating: 80 },
 ];
 
-const App: React.FC = () => <HomePage offers={offers} />;
+const isAuthorized = false;
+
+const App: React.FC = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<HomePage offers={offers} />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/favorites"
+        element={
+          <PrivateRoute isAuthorized={isAuthorized}>
+            <FavoritesPage />
+          </PrivateRoute>
+        }
+      />
+      <Route path="/offer/:id" element={<OfferPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;
