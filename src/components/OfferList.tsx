@@ -7,7 +7,7 @@ interface OfferListProps {
 }
 
 const OfferList: React.FC<OfferListProps> = ({ offers }) => {
-  const [activeOfferId, setActiveOfferId] = useState<number | null>(null);
+  const [, setActiveOfferId] = useState<number | null>(null); // оставляем только setter
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -17,7 +17,7 @@ const OfferList: React.FC<OfferListProps> = ({ offers }) => {
           onMouseEnter={() => setActiveOfferId(offer.id)}
           onMouseLeave={() => setActiveOfferId(null)}
         >
-          <OfferCard {...offer} isActive={activeOfferId === offer.id} />
+          <OfferCard {...offer} />
         </div>
       ))}
     </div>

@@ -27,7 +27,10 @@ const CommentForm: React.FC = () => {
               checked={rating === String(value)}
               onChange={(e) => setRating(e.target.value)}
             />
-            <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label">
+            <label
+              htmlFor={`${value}-stars`}
+              className="reviews__rating-label form__rating-label"
+            >
               <span className="visually-hidden">{`${value} stars`}</span>
             </label>
           </React.Fragment>
@@ -41,10 +44,14 @@ const CommentForm: React.FC = () => {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-      ></textarea>
+      />
 
       <div className="reviews__button-wrapper">
-        <button className="reviews__submit form__submit button" type="submit" disabled={!rating || !comment}>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={!rating || !comment}
+        >
           Submit
         </button>
       </div>
