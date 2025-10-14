@@ -1,16 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface OfferCardProps {
+  id: number;
   title: string;
   price: number;
   type: string;
   imageUrl: string;
   isPremium?: boolean;
   isFavorite?: boolean;
-  rating?: number; // 0-100
+  rating?: number;
 }
 
 const OfferCard: React.FC<OfferCardProps> = ({
+  id,
   title,
   price,
   type,
@@ -26,9 +29,9 @@ const OfferCard: React.FC<OfferCardProps> = ({
       </div>
     )}
     <div className="cities__image-wrapper place-card__image-wrapper">
-      <a href="#">
-        <img className="place-card__image" src={imageUrl} width="260" height="200" alt="Place image" />
-      </a>
+      <Link to={`/offer/${id}`}>
+        <img className="place-card__image" src={imageUrl} width="260" height="200" alt={title} />
+      </Link>
     </div>
     <div className="place-card__info">
       <div className="place-card__price-wrapper">
@@ -53,7 +56,7 @@ const OfferCard: React.FC<OfferCardProps> = ({
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#">{title}</a>
+        <Link to={`/offer/${id}`}>{title}</Link>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
