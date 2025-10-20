@@ -8,6 +8,10 @@ export interface Offer {
   isFavorite?: boolean;
   rating?: number;
   description?: string;
+  location: {
+    lat: number;
+    lng: number;
+  };
 }
 
 export const offers: Offer[] = [
@@ -20,6 +24,10 @@ export const offers: Offer[] = [
     isPremium: true,
     rating: 80,
     description: 'Spacious apartment in the heart of the city with stunning views.',
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.85309666406198,
+    },
   },
   {
     id: 2,
@@ -30,6 +38,10 @@ export const offers: Offer[] = [
     isFavorite: true,
     rating: 70,
     description: 'Cozy wooden house perfect for weekend retreats.',
+    location: {
+      lat: 52.3609553943508,
+      lng: 4.85309666406198,
+    },
   },
   {
     id: 3,
@@ -39,6 +51,10 @@ export const offers: Offer[] = [
     imageUrl: 'img/apartment-02.jpg',
     rating: 90,
     description: 'Stylish apartment overlooking the main canal of Amsterdam.',
+    location: {
+      lat: 52.3909553943508,
+      lng: 4.929309666406198,
+    },
   },
   {
     id: 4,
@@ -49,5 +65,9 @@ export const offers: Offer[] = [
     isPremium: true,
     rating: 100,
     description: 'Perfect stay for couples with all modern amenities.',
+    location: {
+      lat: 52.3809553943508,
+      lng: 4.939309666406198,
+    },
   },
 ];
