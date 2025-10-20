@@ -6,14 +6,7 @@ import OfferPage from './components/OfferPage';
 import LoginPage from './components/LoginPage';
 import NotFoundPage from './components/NotFoundPage';
 import PrivateRoute from './components/PrivateRoute';
-
-const offers = [
-  { id: 1, title: 'Beautiful & luxurious apartment at great location', price: 120, type: 'Apartment', imageUrl: 'img/apartment-01.jpg', isPremium: true, rating: 80 },
-  { id: 2, title: 'Wood and stone place', price: 80, type: 'Room', imageUrl: 'img/room.jpg', isFavorite: true, rating: 80 },
-  { id: 3, title: 'Canal View Prinsengracht', price: 132, type: 'Apartment', imageUrl: 'img/apartment-02.jpg', rating: 80 },
-  { id: 4, title: 'Nice, cozy, warm big bed apartment', price: 180, type: 'Apartment', imageUrl: 'img/apartment-03.jpg', isPremium: true, rating: 100 },
-  { id: 5, title: 'Wood and stone place', price: 80, type: 'Room', imageUrl: 'img/room.jpg', isFavorite: true, rating: 80 },
-];
+import { offers } from './mocks/offers';
 
 const isAuthorized = false;
 
@@ -26,7 +19,7 @@ const App: React.FC = () => (
         path="/favorites"
         element={
           <PrivateRoute isAuthorized={isAuthorized}>
-            <FavoritesPage />
+            <FavoritesPage offers={offers} />
           </PrivateRoute>
         }
       />
