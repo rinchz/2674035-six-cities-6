@@ -1,15 +1,20 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { offers } from '../mocks/offers';
+import { reviews } from '../mocks/reviews';
 import CommentForm from './CommentForm';
+import ReviewList from './ReviewList';
+import Map from './Map';
+import NearOffersList from './NearOffersList';
 
 const OfferPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const offer = offers.find((o) => o.id === Number(id));
-
   if (!offer) {
     return <p>Offer not found</p>;
   }
+
+  const nearbyOffers = offers.filter((o) => o.id !== offer.id).slice(0, 3);
 
   return (
     <div className="page">
@@ -27,9 +32,20 @@ const OfferPage: React.FC = () => {
             <p className="offer__type">{offer.type}</p>
             <p className="offer__text">{offer.description}</p>
           </div>
+
           <section className="offer__reviews reviews">
-            <h2 className="reviews__title">Reviews · <span className="reviews__amount">2</span></h2>
+            <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
+            <ReviewList reviews={reviews } />
             <CommentForm />
+          </section>
+
+          <section className="offer__map map">
+            <Map offers={[offer, ...nearbyOffers]} />
+          </section>
+
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <NearOffersList offers={nearbyOffers} />
           </section>
         </section>
       </main>
