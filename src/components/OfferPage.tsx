@@ -1,26 +1,24 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { offers } from '../mocks/offers';
+import { offers as allOffers } from '../mocks/offers';
 import ReviewList from './ReviewList';
 import CommentForm from './CommentForm';
 import Map from './Map';
 import OfferList from './OfferList';
-import { reviews } from '../mocks/reviews';
 
 const OfferPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const offer = offers.find((o) => o.id === Number(id));
+  const offer = allOffers.find((o) => o.id === Number(id));
 
   if (!offer) {
     return <p>Offer not found</p>;
   }
 
-  const nearOffers = offers.filter((o) => o.id !== offer.id).slice(0, 3);
-  const offerReviews = reviews.filter((r) => r.offerId === offer.id);
+  const nearOffers = allOffers.filter((o) => o.id !== offer.id).slice(0, 3);
 
   return (
     <div className="page">
-      <header className="header"></header>
+      <header className="header">{/* header */}</header>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">
@@ -39,14 +37,14 @@ const OfferPage: React.FC = () => {
 
           <section className="offer__reviews reviews">
             <h2 className="reviews__title">
-              Reviews · <span className="reviews__amount">{offerReviews.length}</span>
+              Reviews · <span className="reviews__amount">2</span>
             </h2>
-            <ReviewList reviews={offerReviews} />
+            <ReviewList reviews={[]} />
             <CommentForm />
           </section>
 
           <section className="offer__map map">
-            <Map offers={[offer, ...nearOffers]} />
+            <Map offers={[offer, ...nearOffers]} activeOfferId={null} />
           </section>
         </section>
 
