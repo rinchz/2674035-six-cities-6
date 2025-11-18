@@ -11,7 +11,9 @@ const Map: React.FC<MapProps> = ({ offers }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!mapRef.current) {
+      return;
+    }
 
     const city = { lat: 52.38333, lng: 4.9, zoom: 12 };
     const map = leaflet.map(mapRef.current, { center: [city.lat, city.lng], zoom: city.zoom });
