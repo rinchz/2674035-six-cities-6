@@ -1,41 +1,34 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 import OfferList from './OfferList';
 import Map from './Map';
-import { Offer } from '../mocks/offers';
 
-interface HomePageProps {
-  offers: Offer[];
-}
+const HomePage: React.FC = () => {
+  const city = useSelector((state: RootState) => state.city);
+  const allOffers = useSelector((state: RootState) => state.offers);
 
-const HomePage: React.FC<HomePageProps> = ({ offers }) => (
-  <div className="page page--gray page--main">
-    <header className="header">
-      {/* header из main.html */}
-    </header>
+  const offers = allOffers.filter((offer) => offer.city === city);
 
-    <main className="page__main page__main--index">
-      <h1 className="visually-hidden">Cities</h1>
+  return (
+    <div className="page page--gray page--main">
+      <header className="header">{/* header */}</header>
+      <main className="page__main page__main--index">
+        <h1 className="visually-hidden">Cities</h1>
 
-      <div className="tabs">{/* блок с локациями */}</div>
-
-      <div className="cities">
-        <div className="cities__places-container container">
-          <section className="cities__places places">
+        <section className="cities">
+          <div className="cities__places-container container">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{offers.length} places to stay in Amsterdam</b>
-
+            <b className="places__found">{offers.length} places to stay in {city}</b>
             <OfferList offers={offers} />
-          </section>
-
-          <div className="cities__right-section">
-            <section className="cities__map map">
-              <Map offers={offers} />
-            </section>
           </div>
-        </div>
-      </div>
-    </main>
-  </div>
-);
+          <div className="cities__right-section">
+            <Map offers={offers} />
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+};
 
 export default HomePage;

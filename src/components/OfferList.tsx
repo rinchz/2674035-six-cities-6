@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import OfferCard from './OfferCard';
 import { Offer } from '../mocks/offers';
 
@@ -7,18 +7,10 @@ interface OfferListProps {
 }
 
 const OfferList: React.FC<OfferListProps> = ({ offers }) => {
-  const [, setActiveOfferId] = useState<number | null>(null);
-
   return (
     <div className="cities__places-list places__list tabs__content">
       {offers.map((offer) => (
-        <div
-          key={offer.id}
-          onMouseEnter={() => setActiveOfferId(offer.id)}
-          onMouseLeave={() => setActiveOfferId(null)}
-        >
-          <OfferCard {...offer} />
-        </div>
+        <OfferCard key={offer.id} {...offer} />
       ))}
     </div>
   );
