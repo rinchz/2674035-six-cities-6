@@ -1,45 +1,44 @@
-import React, { useEffect, useRef } from 'react';
-import leaflet from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import React from 'react';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import L from 'leaflet';
 import { Offer } from '../mocks/offers';
 
 interface MapProps {
   offers: Offer[];
+  activeOfferId: number | null;
 }
 
-const Map: React.FC<MapProps> = ({ offers }) => {
-  const mapRef = useRef<HTMLDivElement | null>(null);
+const defaultIcon = L.icon({
+  iconUrl: '/img/pin.svg',
+  iconSize: [27, 39],
+});
 
-  useEffect(() => {
-    if (!mapRef.current) {
-      return;
-    }
+const activeIcon = L.icon({
+  iconUrl: '/img/pin-active.svg',
+  iconSize: [27, 39],
+});
 
-    const city = { lat: 52.38333, lng: 4.9, zoom: 12 };
-    const map = leaflet.map(mapRef.current, { center: [city.lat, city.lng], zoom: city.zoom });
+const Map: React.FC<MapProps> = ({ offers, activeOfferId }) => {
+  if (offers.length === 0) {
+    return null;
+  }
 
-    leaflet
-      .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-      })
-      .addTo(map);
+  const center = [offers[0].location.lat, offers[0].location.lng] as [number, number];
 
-    const icon = leaflet.icon({
-      iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-green.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-    });
-
-    offers.forEach((offer) => {
-      leaflet.marker([offer.location.lat, offer.location.lng], { icon }).addTo(map);
-    });
-
-    return () => {
-      map.remove();
-    };
-  }, [offers]);
-
-  return <div ref={mapRef} style={{ height: '100%', minHeight: '500px', width: '100%' }} />;
+  return (
+    <MapContainer center={center} zoom={13} style={{ height: '100%', width: '100%' }}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      {offers.map((offer) => (
+        <Marker
+          key={offer.id}
+          position={[offer.location.lat, offer.location.lng]}
+          icon={offer.id === activeOfferId ? activeIcon : defaultIcon}
+        />
+      ))}
+    </MapContainer>
+  );
 };
 
 export default Map;
