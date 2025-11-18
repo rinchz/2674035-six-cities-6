@@ -28,23 +28,20 @@ const Map: React.FC<MapProps> = ({ offers }) => {
 
     leaflet
       .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       })
       .addTo(map);
 
     const icon = leaflet.icon({
-      iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-green.png',
+      iconUrl:
+        'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-green.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
     });
 
     offers.forEach((offer) => {
-      leaflet
-        .marker({
-          lat: offer.location.lat,
-          lng: offer.location.lng,
-        }, { icon })
-        .addTo(map);
+      leaflet.marker([offer.location.lat, offer.location.lng], { icon }).addTo(map);
     });
 
     return () => {

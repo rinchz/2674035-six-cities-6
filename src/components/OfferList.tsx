@@ -7,7 +7,7 @@ interface OfferListProps {
 }
 
 const OfferList: React.FC<OfferListProps> = ({ offers }) => {
-  const [, setActiveOfferId] = useState<number | null>(null); // оставляем только setter
+  const [, setActiveOfferId] = useState<number | null>(null);
 
   return (
     <div className="cities__places-list places__list tabs__content">
