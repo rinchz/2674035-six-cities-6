@@ -6,14 +6,12 @@ interface OfferListProps {
   offers: Offer[];
 }
 
-const OfferList: React.FC<OfferListProps> = ({ offers }) => {
-  return (
-    <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => (
-        <OfferCard key={offer.id} {...offer} />
-      ))}
-    </div>
-  );
-};
+const OfferList: React.FC<OfferListProps> = ({ offers }) => (
+  <div className="cities__places-list places__list tabs__content">
+    {offers.map((offer) => (
+      <OfferCard key={offer.id} {...offer} />
+    ))}
+  </div>
+);
 
 export default OfferList;

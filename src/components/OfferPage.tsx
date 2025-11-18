@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { offers } from '../mocks/offers';
-import { reviews } from '../mocks/reviews';
 import ReviewList from './ReviewList';
 import CommentForm from './CommentForm';
 import Map from './Map';
 import OfferList from './OfferList';
+import { reviews } from '../mocks/reviews';
 
 const OfferPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -15,12 +15,12 @@ const OfferPage: React.FC = () => {
     return <p>Offer not found</p>;
   }
 
-  const offerReviews = reviews.filter((r) => r.offerId === offer.id);
   const nearOffers = offers.filter((o) => o.id !== offer.id).slice(0, 3);
+  const offerReviews = reviews.filter((r) => r.offerId === offer.id);
 
   return (
     <div className="page">
-      <header className="header">{/* header */}</header>
+      <header className="header"></header>
       <main className="page__main page__main--offer">
         <section className="offer">
           <div className="offer__gallery-container container">

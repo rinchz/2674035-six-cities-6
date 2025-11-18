@@ -12,7 +12,7 @@ export interface Offer {
     lat: number;
     lng: number;
   };
-  city: string; 
+  city: string;
 }
 
 export const offers: Offer[] = [

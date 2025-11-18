@@ -11,31 +11,19 @@ const Map: React.FC<MapProps> = ({ offers }) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!mapRef.current) {
-      return;
-    }
+    if (!mapRef.current) return;
 
-    const city = {
-      lat: 52.38333,
-      lng: 4.9,
-      zoom: 12,
-    };
-
-    const map = leaflet.map(mapRef.current, {
-      center: [city.lat, city.lng],
-      zoom: city.zoom,
-    });
+    const city = { lat: 52.38333, lng: 4.9, zoom: 12 };
+    const map = leaflet.map(mapRef.current, { center: [city.lat, city.lng], zoom: city.zoom });
 
     leaflet
       .tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       })
       .addTo(map);
 
     const icon = leaflet.icon({
-      iconUrl:
-        'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-green.png',
+      iconUrl: 'https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-2x-green.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
     });

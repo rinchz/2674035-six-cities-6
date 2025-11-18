@@ -12,10 +12,9 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="page page--gray page--main">
-      <header className="header">{/* header */}</header>
+      <header className="header"></header>
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-
         <section className="cities">
           <div className="cities__places-container container">
             <h2 className="visually-hidden">Places</h2>
