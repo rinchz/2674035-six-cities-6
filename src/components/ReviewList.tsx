@@ -1,5 +1,6 @@
 import React from 'react';
-import Review, { ReviewData } from './Review';
+import Review from './Review';
+import { ReviewData } from '../mocks/reviews';
 
 interface ReviewListProps {
   reviews: ReviewData[];
